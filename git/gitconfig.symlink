@@ -1,0 +1,8 @@
+[user]
+	name = Wouter de Vries
+	email = wouter@oxyzen.nl
+[core]
+	autocrlf = input
+	excludesfile = ~/.gitignore_global
+[push]
+	default = matching
