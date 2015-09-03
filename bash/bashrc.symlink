@@ -4,3 +4,8 @@ bind '"\eOA": history-search-backward'
 bind '"\eOB": history-search-forward'
 HISTIGNORE="jrnl *"
 
+
+function authorize_me() {
+   cat ~/.ssh/id_rsa.pub | ssh $1 "mkdir -p .ssh; cat - >> .ssh/authorized_keys"
+}
+
