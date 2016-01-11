@@ -4,6 +4,12 @@ bind '"\eOA": history-search-backward'
 bind '"\eOB": history-search-forward'
 HISTIGNORE="jrnl *"
 
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+
+PATH=$PATH:/usr/local/bin
 
 function authorize_me() {
    cat ~/.ssh/id_rsa.pub | ssh $1 "mkdir -p .ssh; cat - >> .ssh/authorized_keys"
