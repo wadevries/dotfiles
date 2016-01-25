@@ -17,5 +17,15 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 run-shell "powerline-daemon -q"
 source "/usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf"
 
+# Enable mouse control (clickable windows, panes, resizable panes)
+set -g mouse on
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
+bind -n WheelDownPane select-pane -t= \; send-keys -M
+bind -n C-WheelUpPane select-pane -t= \; copy-mode -e \; send-keys -M
+bind -t vi-copy    C-WheelUpPane   halfpage-up
+bind -t vi-copy    C-WheelDownPane halfpage-down
+bind -t emacs-copy C-WheelUpPane   halfpage-up
+bind -t emacs-copy C-WheelDownPane halfpage-down
+
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
