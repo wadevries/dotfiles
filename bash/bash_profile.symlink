@@ -17,5 +17,8 @@ alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall F
 export PROJECT_HOME=~/dev
 export WORKON_HOME=~/dev/envs
 mkdir -p $WORKON_HOME
-source /usr/local/bin/virtualenvwrapper.sh
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
