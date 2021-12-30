@@ -2,16 +2,13 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 alias ll='ls -laG'
+alias dc='docker compose'
 
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
 
 export PS1="\[\e[32m\u\e[0m \[\e[2m\t\]\e[0m \[\e[36m\w\]\[\e[0m\] \e[93m\$(git branch 2>/dev/null | sed -n \"s/* \(.*\)/\1 /p\")\e[0m\n🦄 "
-
-
-alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
 
 export PROJECT_HOME=~/dev
@@ -24,4 +21,14 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# Disable Sentry logging from local node
+export SENTRY_ENVIRONMENT=development
+export SENTRY_DISABLED=true
+
+# My utils
+if [ -f ~/.bash_utils ]; then
+   source ~/.bash_utils
+fi
+
 

@@ -4,6 +4,19 @@ bind '"\eOA": history-search-backward'
 bind '"\eOB": history-search-forward'
 HISTIGNORE="jrnl *"
 
+#### History configuration
+
+# Store more history
+HISTSIZE=5000
+HISTFILESIZE=10000
+
+# Ensure history is appended to, not overwritten
+shopt -s histappend
+
+# Immediately store command in history and reload it, to make it available in all sessions
+# XXX Not sure about this
+# export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
 #powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1

@@ -14,3 +14,5 @@
 	trustExitCode = true
 [commit]
 	template = /Users/wouter/.stCommitMsg
+[pull]
+	ff = only
