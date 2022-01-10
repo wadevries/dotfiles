@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -euo pipefail
+
+verify_master() {
+  BRANCH=$(git branch --show-current)
+
+  if [[ $BRANCH != "master" ]]; then
+    echo "You're not on master!"
+    exit -1
+  fi
+
+  git remote update
+  if git status -uno --short --porcelain --branch | grep --quiet behind; then
+    echo "You're behind! Pull your branch first."
+    exit 1;
+  fi
+}
+
+bump() {
+  verify_master
+  pyenv exec bumpversion --commit --tag --verbose $@
+}
+
+cleanbranches() {
+   git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -d
+}
+
+"$@"
