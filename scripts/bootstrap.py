@@ -8,7 +8,7 @@ HOME = os.getenv('HOME')
 
 def confirm(question, choices, default):
     def ask_question():
-        return raw_input("{}? [{}] ".format(question, default))
+        return input("{}? [{}] ".format(question, default))
 
     response = ask_question()
     while response not in choices or response == '':
@@ -19,7 +19,7 @@ def confirm(question, choices, default):
 
 
 def install_symlinks():
-    symlinks = glob.glob('../**/*.symlink')
+    symlinks = glob.glob('**/*.symlink')
     for link in symlinks:
         link_base = os.path.splitext(os.path.basename(link))[0]
         src = os.path.abspath(link)
@@ -39,7 +39,7 @@ def install_symlinks():
                     os.unlink(destination)
 
             elif os.path.islink(destination):
-                print "Link to {} exists, skipping".format(src)
+                print("Link to {} exists, skipping".format(src))
                 continue
 
         os.symlink(src, destination)

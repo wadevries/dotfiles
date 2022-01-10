@@ -3,22 +3,33 @@ export LANG=en_US.UTF-8
 
 alias ll='ls -laG'
 alias dc='docker compose'
+alias vpn='security find-generic-password -wl "fortinet vpn" | sudo openconnect --config ~/.config/openconnect'
 
-if [ -f ~/.bashrc ]; then
-   source ~/.bashrc
-fi
+function vpn-connect {
+  INTERFACE="utun99"
+  VPN_CONNECTED=$(ifconfig | grep -A3 $INTERFACE | grep inet)
+  if [[ $VPN_CONNECTED ]]; then
+      echo "already conected"
+  else
+      VPN_PASS=$(security find-generic-password -wl "fortinet vpn")
+      echo "${VPN_PASS}" | sudo openconnect --interface $INTERFACE --config $HOME/.config/openconnect
+  fi
+}
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export PS1="\[\e[32m\u\e[0m \[\e[2m\t\]\e[0m \[\e[36m\w\]\[\e[0m\] \e[93m\$(git branch 2>/dev/null | sed -n \"s/* \(.*\)/\1 /p\")\e[0m\n🦄 "
 
 
 export PROJECT_HOME=~/dev
-export WORKON_HOME=~/dev/envs
-mkdir -p $WORKON_HOME
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
+
+if [ -f ~/.bashrc ]; then
+   source ~/.bashrc
+fi
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
@@ -31,4 +42,7 @@ if [ -f ~/.bash_utils ]; then
    source ~/.bash_utils
 fi
 
+export BASH_SILENCE_DEPRECATION_WARNING=1
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
+export PATH="${HOME}/local/bin:$PATH"

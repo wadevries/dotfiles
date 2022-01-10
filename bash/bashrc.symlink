@@ -17,18 +17,5 @@ shopt -s histappend
 # XXX Not sure about this
 # export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-#powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-#. /Users/wouter/.pyenv/versions/2.7.14/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-
-PATH=$PATH:/usr/local/bin
-
-function authorize_me() {
-   cat ~/.ssh/id_rsa.pub | ssh $1 "mkdir -p .ssh; cat - >> .ssh/authorized_keys"
-}
-
-# export SSL_CERT_FILE=/usr/local/lib/python2.7/site-packages/certifi/cacert.pem
-# export REQUESTS_CA_BUNDLE=$SSL_CERT_FILE
-
 export PGHOST=localhost
+eval "$(pyenv init -)"
