@@ -1,11 +1,97 @@
+# Logs
+log/
+logs/
+*.log
+
+# Runtime data
+*.pid
+*.pid.lock
+
+### Linux ###
 *~
+
+### OSX ###
+
+# General
 .DS_Store
-*.pyc
-*.idea
-.eggs
-**.egg-info
-node_modules
-notebook_library/build
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+### Ansible ###
+.cache/
+
+### PyCharm ###
+.idea/
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+*.egg-info/
+
+# virtualenv
+env/
+venv/
+
+# pyenv
+.python-version
+
+# Unit test / coverage reports
+
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+
+# Django stuff:
+db.sqlite3
+
+# Sphinx documentation
+docs/_build/
+
+# Jupyter Notebook
 .ipynb_checkpoints
-activate
-manifest.py
+
+# celery beat schedule file
+celerybeat-schedule
+
+# mypy
+.mypy_cache/
+
+### Sass ###
+.sass-cache/
+
+### Vagrant ###
+.vagrant/
+
+### Javascript/Node ###
+
+# Dependency directories
+node_modules/
+
+# NPM
+.npm
+npm-debug.log*
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Yarn
+yarn-debug.log*
+yarn-error.log*
+.yarn-integrity
+
+# My own stuff
+taskfile
