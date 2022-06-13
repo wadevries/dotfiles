@@ -3,21 +3,17 @@ export LANG=en_US.UTF-8
 
 alias ll='ls -laG'
 alias dc='docker compose'
+alias gs='git switch'
 alias vpn='security find-generic-password -wl "fortinet vpn" | sudo openconnect --config ~/.config/openconnect'
 
-function vpn-connect {
-  INTERFACE="utun99"
-  VPN_CONNECTED=$(ifconfig | grep -A3 $INTERFACE | grep inet)
-  if [[ $VPN_CONNECTED ]]; then
-      echo "already conected"
-  else
-      VPN_PASS=$(security find-generic-password -wl "fortinet vpn")
-      echo "${VPN_PASS}" | sudo openconnect --interface $INTERFACE --config $HOME/.config/openconnect
-  fi
-}
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-export PS1="\[\e[32m\u\e[0m \[\e[2m\t\]\e[0m \[\e[36m\w\]\[\e[0m\] \e[93m\$(git branch 2>/dev/null | sed -n \"s/* \(.*\)/\1 /p\")\e[0m\n🦄 "
+if [[ $TERMINAL_EMULATOR == "JetBrains-JediTerm" ]]
+then
+    export PS1="\w> "
+else
+    export PS1="\[\e[32m\u\e[0m \[\e[2m\t\]\e[0m \[\e[36m\w\]\[\e[0m\] \e[93m\$(git branch 2>/dev/null | sed -n \"s/* \(.*\)/\1 /p\")\e[0m\n🦄 "
+fi
 
 
 export PROJECT_HOME=~/dev
@@ -46,3 +42,9 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 export PATH="${HOME}/local/bin:$PATH"
+
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
